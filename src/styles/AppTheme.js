@@ -21,4 +21,4 @@ export default {
     disabledColor: ColorManipulator.fade(Colors.darkBlack, 0.3),
     pickerHeaderColor: Colors.cyan500
   }
-};
+}

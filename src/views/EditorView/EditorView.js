@@ -7,7 +7,7 @@ import Renderer from '../../components/Renderer'
 import AppNavBar from '../../components/AppNavBar'
 import ThemeManager from 'material-ui/lib/styles/theme-manager'
 import AppTheme from '../../styles/AppTheme'
-import Colors from 'material-ui/lib/styles/colors'
+// import Colors from 'material-ui/lib/styles/colors'
 import classes from './EditorView.scss'
 
 // We define mapStateToProps where we'd normally use
@@ -39,13 +39,13 @@ export class EditorView extends React.Component {
   }
 
   static childContextTypes = {
-    muiTheme: React.PropTypes.object,
+    muiTheme: React.PropTypes.object
   };
 
-  getChildContext() {
+  getChildContext () {
     return {
       muiTheme: ThemeManager.getMuiTheme(AppTheme)
-    };
+    }
   }
 
   update (editValue) {
