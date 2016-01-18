@@ -9,6 +9,7 @@ import ThemeManager from 'material-ui/lib/styles/theme-manager'
 import AppTheme from '../../styles/AppTheme'
 // import Colors from 'material-ui/lib/styles/colors'
 import classes from './EditorView.scss'
+import highlight from 'highlight.js'
 
 // We define mapStateToProps where we'd normally use
 // the @connect decorator so the data requirements are clear upfront, but then
@@ -18,6 +19,19 @@ import classes from './EditorView.scss'
 const mapStateToProps = (state) => ({
   counter: state.counter
 })
+
+let renderer = new marked.Renderer()
+renderer.heading = function (text, level) {
+  var escapedText = text.toLowerCase().replace(/[^\w]+/g, '-')
+
+  return '<h' + level + '><a name="' +
+                escapedText +
+                 '" class="anchor" href="#' +
+                 escapedText +
+                 '"><span class="header-link"></span></a>' +
+                  text + '</h' + level + '>'
+}
+
 export class EditorView extends React.Component {
   constructor () {
     super()
@@ -57,7 +71,12 @@ export class EditorView extends React.Component {
   rawMarkdown (value) {
     return {
       __html: marked(value, {
-        sanitize: true
+        renderer: renderer,
+        sanitize: true,
+        gfm: true,
+        highlight: function (code) {
+          return highlight.highlightAuto(code).value
+        }
       })
     }
   }

@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react'
+import ReactDOM from 'react-dom'
 
 export default class MarkDownInput extends React.Component {
   constructor () {
@@ -12,7 +13,7 @@ export default class MarkDownInput extends React.Component {
   };
 
   update () {
-    let val = React.findDOMNode(this.refs.inputValue).value
+    let val = ReactDOM.findDOMNode(this.refs.inputValue).value
     this.props.update(val)
   }
   render () {
